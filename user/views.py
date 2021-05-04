@@ -9,6 +9,16 @@ from user.models    import User
 class SignView(View):
     def get(self, request):
         try:
+            """
+            Created: 2021-03-04
+            Updated: 2021-05-04
+
+            rewards에 id, quantity 넘어옴
+
+            [로그인 페이지]
+            - 카카오 소셜 로그인
+
+            """
             kakao_access_token = request.headers['authorization']
             kakao_profile_url  = 'https://kapi.kakao.com/v2/user/me'
             headers            = ({'authorization' : f'Bearer {kakao_access_token}'})
@@ -16,17 +26,17 @@ class SignView(View):
     
             kakao_id      = response['id']
             kakao_user    = response['kakao_account']
-           
+
             if not User.objects.filter(kakao_id = kakao_id).exists():
                 User.objects.create(
                     kakao_id = kakao_id,
                     email    = kakao_user['email'],
                     nickname = response['properties']['nickname'],
                 )
-           
+
             user         = User.objects.get(kakao_id = kakao_id)
             access_token = jwt.encode({'user_id' : user.id}, SECRET_KEY, algorithm=ALGORITHM)
-           
+
             return JsonResponse({'message' : 'SUCCESS', 'access_token' : access_token}, status=200)
 
         except KeyError:

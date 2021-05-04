@@ -11,16 +11,16 @@
 <br>
 
 ## 기술 스택
-Python, Django, MySQL
+Python, Django, MySQL, AWS
 <br>
 
 ## 프로젝트 설명 
-마이리얼트립을 모티브로 진행한 크라우드 펀딩 웹사이트 프로젝트입니다.
+마이리얼트립을 모티브로 진행한 여행 예약 플랫폼 프로젝트입니다.
 <br>
 
-### Document
+## Document
 
-[API Document](https://www.notion.so/API-Document-1cf78af22e05467487da83827bf5ea9f, "API Document")
+[API Document](https://www.notion.so/API-Document-e1c56cbbc3a3418b8f1d211aaf4fcd71, "API Document")
 
 <br>
 
@@ -110,7 +110,7 @@ Apps:
 
 <br>
 
-### ERD
+## ERD
 [Aquery Tool](https://aquerytool.com/aquerymain/index/?rurl=87d8b805-63fd-481a-b942-7cad6c424c64) (pw: 47k3aj)
 
 ## 구현 기능 

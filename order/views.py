@@ -14,6 +14,15 @@ class FlightRoundTripOrderView(View):
     @validate_signin
     def post(self, request):
         try:
+
+            """
+            Created: 2021-03-09
+            Updated: 2021-05-04
+            
+            [항공 왕복 주문 페이지]
+            - 사용자 입력값으로 주문 생성
+            """
+
             data             = json.loads(request.body)
             passenger        = data['passenger']
             if passenger == 0:
@@ -37,19 +46,26 @@ class FlightRoundTripOrderView(View):
             return JsonResponse({'message' : 'NEED_VALUE'}, status=400)
 
         except FlightPrice.DoesNotExist:
-            return JsonResponse({'message' : 'INVALID_FLIGHT_ID'}, status=400)
+            return JsonResponse({'message' : 'INVALID_FLIGHT_ID'}, status=404)
 
 class AccommodationOrderView(View):
     @validate_signin
     def post(self, request):
         try:
+            """
+            Created: 2021-03-10
+            Updated: 2021-05-04
+            
+            [숙소 주문 페이지]
+            - 사용자 입력값으로 주문 생성
+            """
             user        = request.user
             data        = json.loads(request.body)
-            total_price = data.get('totalPrice')
-            guest       = data.get('guest')
-            start_date  = data.get('startDate')
-            end_date    = data.get('endDate')
-            room        = data.get('room')
+            total_price = data['totalPrice']
+            guest       = data['guest']
+            start_date  = data['startDate']
+            end_date    = data['endDate']
+            room        = data['room']
 
             AccommodationOrder.objects.create(
                 total_price   = total_price,
@@ -64,7 +80,7 @@ class AccommodationOrderView(View):
             return JsonResponse({'message': 'SUCCESS'}, status=200)
 
         except Room.DoesNotExist:
-            return JsonResponse({'message': 'ROOM_DOES_NOT_EXIST'}, status=400)
-
-        except OrderStatus.DoesNotExist:
-            return JsonResponse({'message': 'ORDER_STATUS_DOES_NOT_EXIST'}, status=400)
+            return JsonResponse({'message': 'ROOM_DOES_NOT_EXIST'}, status=404)
+        
+        except KeyError:
+            return JsonResponse({'message': "KEY_ERROR"}, status=400)
