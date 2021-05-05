@@ -24,37 +24,38 @@ from accommodation.models   import (
 class AccommodationListView(View):
 
     def get(self, request, category_id=0):
+
+        """
+        Created: 2021-03-09
+        Updated: 2021-05-04
+        
+        [숙소 리스트 페이지]
+        - 도시, 체크인 날짜, 체크아웃 날짜, 인원, 평점, 룸 옵션 필터 기능
+        - 정렬 기능
+
+        ~ 도시(city)
+        - 한글 형식
+
+        ~ 체크인 날짜(startDate), 체크아웃 날짜(endDate)
+        - YYYY-MM-DD 형식
+
+        ~ 인원(guest)
+        - 입력된 int 보다 같거나 많은 인원 수용 가능 숙소
+
+        ~ 평점(rate)
+        - 입력된 int 보다 같거나 높은 평점 숙소
+
+        ~ 룸 옵션(roomOption)
+        - 1~30가지
+
+        ~ 정렬(ordering)
+        - favored(추천순)
+        - ratingHigh(평점순)
+        - priceLow(가격낮은순)
+        - priceHigh(가격높은순)
+        """
+
         try:
-
-            """
-            Created: 2021-03-09
-            Updated: 2021-05-04
-            
-            [숙소 리스트 페이지]
-            - 도시, 체크인 날짜, 체크아웃 날짜, 인원, 평점, 룸 옵션 필터 기능
-            - 정렬 기능
-
-            ~ 도시(city)
-            - 한글 형식
-
-            ~ 체크인 날짜(startDate), 체크아웃 날짜(endDate)
-            - YYYY-MM-DD 형식
-
-            ~ 인원(guest)
-            - 입력된 int 보다 같거나 많은 인원 수용 가능 숙소
-
-            ~ 평점(rate)
-            - 입력된 int 보다 같거나 높은 평점 숙소
-
-            ~ 룸 옵션(roomOption)
-            - 1~30가지
-
-            ~ 정렬(ordering)
-            - favored(추천순)
-            - ratingHigh(평점순)
-            - priceLow(가격낮은순)
-            - priceHigh(가격높은순)
-            """
 
             city         = request.GET['city']
             start_date   = request.GET['startDate']
@@ -110,16 +111,17 @@ class AccommodationListView(View):
 
 class AccommodationDetailView(View):
     def get(self, request, accommodation_id):
-        try:
 
-            """
-            Created: 2021-03-09
-            Updated: 2021-05-04
-            
-            [숙소 상세 페이지]
-            - 숙소 상세 정보 확인 기능
-            - 리뷰 확인 기능 
-            """
+        """
+        Created: 2021-03-09
+        Updated: 2021-05-04
+        
+        [숙소 상세 페이지]
+        - 숙소 상세 정보 확인 기능
+        - 리뷰 확인 기능 
+        """
+
+        try:
 
             accommodation = Accommodation.objects.get(id=accommodation_id)
             review_count  = Review.objects.filter(accommodation=accommodation_id).count()

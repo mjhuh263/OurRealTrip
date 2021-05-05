@@ -7,37 +7,35 @@ from .models      import Airline, Airport, FlightPrice, FlightSchedule, FlightSt
 
 class FlightView(View):
     def get(self, request):
+
+        """
+        Created: 2021-03-09
+        Updated: 2021-05-04
+        
+        [항공 페이지]
+        - 출발지, 도착지, 날짜, 시간대, 인원 필터 기능
+        - 정렬 기능
+
+        ~ 출발지(arrival)
+        - 영어 형식(세글자 code)
+
+        ~ 도착지(departure)
+        - 영어 세글자 code
+
+        ~ 날짜(date)
+        - YYYY-MM-DD 형식
+
+        ~ 시간대(time_option)
+        - 1(새벽 00:00~06:00)
+        - 2(오전 06:00~12:00)
+        - 3(오후 12:00~18:00)
+        - 4야간 18:00~24:00)
+
+        ~ 인원(passenger)
+        - int
+
+        """
         try:
-
-            """
-            Created: 2021-03-09
-            Updated: 2021-05-04
-
-            http://localhost:8000/flight?date=2021-03-12&departure=GMP&arrival=CJU&passenger=2&sort=price:asc&timeOption=1
-            
-            [항공 페이지]
-            - 출발지, 도착지, 날짜, 시간대, 인원 필터 기능
-            - 정렬 기능
-
-            ~ 출발지(arrival)
-            - 영어 세글자 code
-
-            ~ 도착지(departure)
-            - 영어 세글자 code
-
-            ~ 날짜(date)
-            - YYYY-MM-DD
-
-            ~ 시간대(time_option)
-            - 1(새벽 00:00~06:00)
-            - 2(오전 06:00~12:00)
-            - 3(오후 12:00~18:00)
-            - 4야간 18:00~24:00)
-
-            ~ 인원(passenger)
-            - int
-
-            """
 
             data        = request.GET
             arrival     = data['arrival']

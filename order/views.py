@@ -13,15 +13,16 @@ from accommodation.models import Room
 class FlightRoundTripOrderView(View):
     @validate_signin
     def post(self, request):
-        try:
 
-            """
-            Created: 2021-03-09
-            Updated: 2021-05-04
-            
-            [항공 왕복 주문 페이지]
-            - 사용자 입력값으로 주문 생성
-            """
+        """
+        Created: 2021-03-09
+        Updated: 2021-05-04
+        
+        [항공 왕복 주문 페이지]
+        - 사용자 입력값으로 주문 생성
+        """
+
+        try:
 
             data             = json.loads(request.body)
             passenger        = data['passenger']
@@ -51,14 +52,17 @@ class FlightRoundTripOrderView(View):
 class AccommodationOrderView(View):
     @validate_signin
     def post(self, request):
+
+        """
+        Created: 2021-03-10
+        Updated: 2021-05-04
+        
+        [숙소 주문 페이지]
+        - 사용자 입력값으로 주문 생성
+        """
+
         try:
-            """
-            Created: 2021-03-10
-            Updated: 2021-05-04
-            
-            [숙소 주문 페이지]
-            - 사용자 입력값으로 주문 생성
-            """
+
             user        = request.user
             data        = json.loads(request.body)
             total_price = data['totalPrice']
