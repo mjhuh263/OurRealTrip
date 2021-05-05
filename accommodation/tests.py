@@ -161,10 +161,18 @@ class AccommodationListTest(TestCase):
             RefundAccount.objects.all().delete()
             UnavailableDate.objects.all().delete()
 
-    def test_accommodation_list_data(self):
+    def test_accommodation_list_data_success(self):
         response = client.get(f'/accommodation?city={self.city.name}&startDate=2021-03-17&endDate=2021-03-18&guest=2&order=favored')
 
         self.assertEqual(response.status_code, 200)
+
+    def test_accommodation_list_data_fail(self):
+        invalid_key = '부산'
+        response         = client.get(f'/accommodation?city={invalid_key}&startDate=2021-03-17&endDate=2021-03-18&guest=2&order=favored')
+
+        self.assertEqual(response.json(), {'message': 'KEY_ERROR'})
+
+        self.assertEqual(response.status_code, 400)
 
 class AccommodationDetailTest(TestCase):
     maxDiff=None
@@ -353,5 +361,5 @@ class AccommodationDetailTest(TestCase):
 
         self.assertEqual(response.json(), {'message': 'INVALID_ACCOMMODATION_ID'})
 
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
     

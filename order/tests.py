@@ -387,31 +387,4 @@ class AoccommodationOrderTest(TestCase):
             content_type='application/json'
         )
         self.assertEqual(response.json(), {'message': 'ROOM_DOES_NOT_EXIST'})
-        self.assertEqual(response.status_code, 400)
-
-    def test_accommodation_order_post_order_status_does_not_exist_error(self):
-        OrderStatus.objects.get(id=1).delete()
-
-        headers = ({
-            'HTTP_AUTHORIZATION': jwt.encode({
-                'user_id': User.objects.get(id=2).id},
-                SECRET_KEY,
-                algorithm=ALGORITHM)
-        })
-
-        data = ({
-            'totalPrice' : 100000.00,
-            'guest'      : 2,
-            'startDate'  : '2021-04-24',
-            'endDate'    : '2021-04-27',
-            'room'       : 1,
-        })
-
-        response = self.client.post(
-            '/order/accommodation',
-            data=data,
-            **headers,
-            content_type='application/json'
-        )
-        self.assertEqual(response.json(), {'message': 'ORDER_STATUS_DOES_NOT_EXIST'})
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
