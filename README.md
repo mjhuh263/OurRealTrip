@@ -20,7 +20,7 @@ Python, Django, MySQL, AWS
 
 ## Document
 
-[API Document](https://www.notion.so/API-Document-e1c56cbbc3a3418b8f1d211aaf4fcd71, "API Document")
+[API Document](https://www.notion.so/API-Document-e1c56cbbc3a3418b8f1d211aaf4fcd71)
 
 <br>
 
